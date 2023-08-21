@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Notable&display=swap');
 
 #site-logo {
     width: 5rem;
 }
 
 #site-name {
- 
     display: inline;
+    color: white;
 }
 
 #github{
@@ -17,8 +17,17 @@
     
 }
 
+#guess-counter {
+    color: white;
+    font-size: 1.6rem;
+}
+
+.team-logos {
+    width: 9rem
+}
+
 html {
-    font-family: 'Notable', sans-serif;
+    font-family: 'Caprasimo', cursive;
 }
 
 body {
@@ -28,7 +37,8 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: grey;
+    background-color: #311042;
+    /* background: linear-gradient(to right bottom, #4C20B2, #595454) */
 }
 
 #nav-bar {
@@ -37,7 +47,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color: pink;
+    background-color: #311042;
 }
 
 #name-logo {
@@ -63,7 +73,7 @@ body {
     justify-content: center;
 }
 #game-board {
-    width: 25rem;
+    width: 40rem;
     /* height: 20rem; */
     /* margin-right: auto;
     margin-left: auto; */
@@ -89,13 +99,22 @@ body {
 
 #game-board button {
     width: 25%;
+    background-color: #311042;
+    border-radius: 10px;
+    border-color: white;
     aspect-ratio:  1 / 1 ;
+}
+
+#game-board button:hover {
+    border-color: white;
+    background-color: mediumpurple;
+    
+
+}
+#modal {
+    max-width: 100%;
 }
 /* .active {
     display: block;
 } */
 
-#guess-bar {
-    display: flex;
-    flex-direction: row;
-}

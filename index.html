@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body onload = "selectRandomImage()">
     <!-- Your content goes here -->
     <header id="nav-bar">
         <div id="name-logo">
@@ -24,32 +24,35 @@
     <div id="board-wrapper">
         <div id="flex-container">
             <div id="game-board">
-                <div class="board-cell"></div>
-                <div class="board-cell">test</div>
-                <div class="board-cell">test</div>
-                <div class="board-cell">test</div>
-                <div class="board-cell">test</div>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <div class="board-cell">test</div>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <div class="board-cell">test</div>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
+                <div class="board-cell" id="guess-counter">Guesses: 9</div>
+                <div class="board-cell"><img class="team-logos" id="team-logo1"></div>
+                <div class="board-cell"><img class="team-logos" id="team-logo2"></div>
+                <div class="board-cell"><img class="team-logos" id="team-logo3"></div>
+                <div class="board-cell"><img class="team-logos" id="team-logo4"></div>
+                <button onclick="openGuessTab()"></button>
+                <button onclick="openGuessTab()"></button>
+                <button onclick="openGuessTab()"></button>
+                <div class="board-cell"><img class="team-logos" id="team-logo5"></div>
+                <button onclick="openGuessTab()"></button>
+                <button onclick="openGuessTab()"></button>
+                <button onclick="openGuessTab()"></button>
+                <div class="board-cell"><img class="team-logos" id="team-logo6"></div>
+                <button onclick="openGuessTab()"></button>
+                <button onclick="openGuessTab()"></button>
+                <button onclick="openGuessTab()"></button>
     
-            </div>
-            <div id="guess-bar"> 
-                <label for="Guess">Guess:</label>
-                <input type="text" id="Guess" name="Guess" placeholder="Player Name">
-
             </div>
             
         </div>
     </div>
+    <dialog id="modal">
+        <input type="text" id="guess" name="guess" placeholder="Player Name">
+        <button onclick="searchPlayer()">Search Player</button>
+    </dialog>
+    <dialog id="results">
+        <select name="search-results" id="search-results"> </select>
+        <button onclick="submitGuess()">Submit Guess</button>
+    </dialog>
     
     <!-- Link to the JavaScript file -->
 
