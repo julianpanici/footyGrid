@@ -9,12 +9,12 @@
     color: white;
 }
 
-#github{
+#github {
     float: right;
 }
+
 #github-logo {
     width: 5rem
-    
 }
 
 #guess-counter {
@@ -66,25 +66,26 @@ body {
 }
 
 #flex-container {
-/*  */
+    /*  */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+
 #game-board {
     width: 40rem;
     /* height: 20rem; */
     /* margin-right: auto;
     margin-left: auto; */
     margin: auto;
-   /* display: grid;
+    /* display: grid;
    grid-template-columns: repeat(3,minmax(0,1fr)); */
-   display: flex;
-   flex-direction: row;
-   flex-wrap: wrap;
-   align-items: center;
-   justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .board-cell {
@@ -94,7 +95,7 @@ body {
     aspect-ratio: 1 / 1;
     align-items: center;
     justify-content: center;
-  
+
 }
 
 #game-board button {
@@ -102,19 +103,20 @@ body {
     background-color: #311042;
     border-radius: 10px;
     border-color: white;
-    aspect-ratio:  1 / 1 ;
+    aspect-ratio: 1 / 1;
 }
 
 #game-board button:hover {
     border-color: white;
     background-color: mediumpurple;
-    
+
 
 }
+
 #modal {
     max-width: 100%;
 }
+
 /* .active {
     display: block;
 } */
-
