@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Notable&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&family=Notable&display=swap");
 
 #site-logo {
-    width: 5rem;
+  width: 5rem;
 }
 
 #site-name {
-    display: inline;
-    color: white;
+  display: inline;
+  color: white;
 }
 
 #github {
@@ -18,51 +18,51 @@
 }
 
 #guess-counter {
-    color: white;
-    font-size: 1.6rem;
+  color: white;
+  font-size: 1.6rem;
 }
 
 .team-logos {
-    width: 9rem
+  width: 9rem;
 }
 
 html {
-    font-family: 'Caprasimo', cursive;
+  font-family: "Caprasimo", cursive;
 }
 
 body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #311042;
-    /* background: linear-gradient(to right bottom, #4C20B2, #595454) */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #311042;
+  /* background: linear-gradient(to right bottom, #4C20B2, #595454) */
 }
 
 #nav-bar {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #311042;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #311042;
 }
 
 #name-logo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
 }
 
 #board-wrapper {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #flex-container {
@@ -74,9 +74,9 @@ body {
 }
 
 #game-board {
-    width: 40rem;
-    /* height: 20rem; */
-    /* margin-right: auto;
+  width: 40rem;
+  /* height: 20rem; */
+  /* margin-right: auto;
     margin-left: auto; */
     margin: auto;
     /* display: grid;
@@ -114,7 +114,7 @@ body {
 }
 
 #modal {
-    max-width: 100%;
+  max-width: 100%;
 }
 
 /* .active {

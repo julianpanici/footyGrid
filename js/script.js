@@ -128,7 +128,6 @@ function openGuessTab(clicked_id) {
   console.log(current_clicked_id);
   const modal = document.querySelector("#modal")
   modal.showModal()
-
 }
 
 async function searchPlayer() {
