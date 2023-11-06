@@ -121,6 +121,8 @@ let game_board = [
 
 let current_clicked_id = -1;
 var playerData = {};
+let guesses = 9;
+let correctAnswers = 0;
 
 
 function openGuessTab(clicked_id) {
@@ -174,11 +176,27 @@ function submitGuess() {
   }
 
   if (found_First_Team && found_Second_Team){
-    console.log("Correct")
+   document.getElementById(`button_image${current_clicked_id}`).src = answer.headshot_url;
+   document.getElementById(`board_button${current_clicked_id}`).disabled = true
+   correctAnswers++
+   console.log("Correct")
   }
+  guesses--;
+  document.getElementById("guess-counter").innerHTML = `Guesses: ${guesses}`;
   document.getElementById("search-results").innerHTML = ""
   const modal = document.querySelector("#results")
   modal.close()
+
+  if(guesses == 0){
+    const End_Screen = document.getElementById("End_Screen")
+    if(correctAnswers==9){
+      const End_Screen = document.getElementById("End_Screen")
+      End_Screen.innerHTML = "You Win!"
+    } else{
+      End_Screen.innerHTML = "You Lose:("
+    }
+    End_Screen.showModal()
+  }
 
 }
 

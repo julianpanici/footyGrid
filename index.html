@@ -24,22 +24,31 @@
     <div id="board-wrapper">
         <div id="flex-container">
             <div id="game-board">
-                <div class="board-cell" id="guess-counter">Guesses: 9</div>
+                <div class="board-cell" id = "guess-counter">Guesses: 9</div>
                 <div class="board-cell"><img class="team-logos" id="team-logo1"></div>
                 <div class="board-cell"><img class="team-logos" id="team-logo2"></div>
                 <div class="board-cell"><img class="team-logos" id="team-logo3"></div>
                 <div class="board-cell"><img class="team-logos" id="team-logo4"></div>
-                <button id = "board_button0" onclick="openGuessTab(this.id)"></button>
-                <button id = "board_button1" onclick="openGuessTab(this.id)"></button>
-                <button id = "board_button2" onclick="openGuessTab(this.id)"></button>
+                <button id = "board_button0" onclick="openGuessTab(this.id)">
+                    <img id = "button_image0"></button>
+                <button id = "board_button1" onclick="openGuessTab(this.id)">
+                    <img id = "button_image1"></button>
+                <button id = "board_button2" onclick="openGuessTab(this.id)">
+                    <img id = "button_image2"></button>
                 <div class="board-cell"><img class="team-logos" id="team-logo5"></div>
-                <button id = "board_button3" onclick="openGuessTab(this.id)"></button>
-                <button id = "board_button4" onclick="openGuessTab(this.id)"></button>
-                <button id = "board_button5" onclick="openGuessTab(this.id)"></button>
+                <button id = "board_button3" onclick="openGuessTab(this.id)">
+                    <img id = "button_image3"></button>
+                <button id = "board_button4" onclick="openGuessTab(this.id)">
+                    <img id = "button_image4"></button>
+                <button id = "board_button5" onclick="openGuessTab(this.id)">
+                    <img id = "button_image5"></button>
                 <div class="board-cell"><img class="team-logos" id="team-logo6"></div>
-                <button id = "board_button6" onclick="openGuessTab(this.id)"></button>
-                <button id = "board_button7" onclick="openGuessTab(this.id)"></button>
-                <button id = "board_button8" onclick="openGuessTab(this.id)"></button>
+                <button id = "board_button6" onclick="openGuessTab(this.id)">
+                    <img id = "button_image6"></button>
+                <button id = "board_button7" onclick="openGuessTab(this.id)">
+                    <img id = "button_image7"></button>
+                <button id = "board_button8" onclick="openGuessTab(this.id)">
+                    <img id = "button_image8"></button>
 
             </div>
 
@@ -52,6 +61,9 @@
     <dialog id="results">
         <select name="search-results" id="search-results"> </select>
         <button onclick="submitGuess()">Submit Guess</button>
+    </dialog>
+    <dialog id="End_Screen">
+        
     </dialog>
 
     <!-- Link to the JavaScript file -->
