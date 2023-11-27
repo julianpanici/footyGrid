@@ -134,7 +134,7 @@ function openGuessTab(clicked_id) {
 }
 
 async function searchPlayer() {
-  let specialChars = `!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~`;
+  let specialChars = `!@#$%^&*()_\-+=\[\]{};:"\\|,.<>\/?~`;
   let specialCharFound = false
   const search = document.getElementById("guess").value
   // Checks submitted string to see if any special characters were entered
