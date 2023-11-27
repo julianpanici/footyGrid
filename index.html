@@ -63,9 +63,11 @@
         <button onclick="submitGuess()">Submit Guess</button>
     </dialog>
     <dialog id="End_Screen">
-        
+        <button id = "end_button" onclick="createGameBoard(); document.getElementById('End_Screen').close()"></button>
     </dialog>
-
+    <dialog id="error_catcher">
+        <button id = "error_catcher_button"onclick="document.getElementById('error_catcher').close()"></button>
+    </dialog>
     <!-- Link to the JavaScript file -->
 
     <script src="js/script.js"></script>

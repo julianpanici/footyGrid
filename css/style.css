@@ -24,6 +24,7 @@
 
 .team-logos {
   width: 9rem;
+  max-width: 100%
 }
 
 html {

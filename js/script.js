@@ -123,6 +123,7 @@ let current_clicked_id = -1;
 var playerData = {};
 let guesses = 9;
 let correctAnswers = 0;
+let reset = false;
 
 
 function openGuessTab(clicked_id) {
@@ -133,19 +134,37 @@ function openGuessTab(clicked_id) {
 }
 
 async function searchPlayer() {
+  let specialChars = `!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~`;
+  let specialCharFound = false
   const search = document.getElementById("guess").value
+  // Checks submitted string to see if any special characters were entered
+  for( let i = 0; i < specialChars.length; i++){
+    if (search.indexOf(specialChars.charAt(i)) >=0){
+      specialCharFound = true
+    }
+  }
+  //Catches special character error and allows user to keep submitting new guesses until error is fixed
+  if (specialCharFound){
+    document.getElementById("error_catcher").showModal();
+    document.getElementById("error_catcher_button").innerHTML = "Error: Search contains special character";
+  } else{
   const response = await fetch(`https://api.sports-reference.com/v1/fb/players?search=${search}`)
   playerData = await response.json()
+  //Catches 0 search results error and allows user to keep submitting new guesses until error is fixed
+  if (typeof playerData.players === undefined || playerData.players == null){
+    document.getElementById("error_catcher").showModal();
+    document.getElementById("error_catcher_button").innerHTML = "Error: Search returned 0 results";
+  }else{
   const modal = document.querySelector("#modal")
   document.getElementById("guess").value = ""
   modal.close()
-  console.log(playerData)
-  for (let i = 0; i < playerData.players.length; i++) {
+  for (i = 0; i < playerData.players.length; i++) {
     addOption(playerData.players[i])
   }
   const resultModal = document.querySelector("#results")
   resultModal.showModal()
-
+  }
+  }
 }
 
 function addOption(player) {
@@ -166,7 +185,7 @@ function submitGuess() {
       i = playerData.players.length
     }
   }
-
+  // Iterates through the teams on the game board, checking their team id against the player's list of teams played for to see if the ids match.
   for(i = 0; i < answer.teams.length; i++){
     if (answer.teams[i].id == game_board[current_clicked_id].team_combo[0]){
       found_First_Team = true
@@ -174,26 +193,27 @@ function submitGuess() {
       found_Second_Team = true
     }
   }
-
+  //If both teams are found, the guess is correct and the headshot of the correct player gets displayed in the box on the game board
+  // The total number of correct numbers also gets incremented by 1
   if (found_First_Team && found_Second_Team){
    document.getElementById(`button_image${current_clicked_id}`).src = answer.headshot_url;
    document.getElementById(`board_button${current_clicked_id}`).disabled = true
    correctAnswers++
    console.log("Correct")
   }
+  //Decrements guess counter after a user guess is submited and updates the number displayed to the user.
   guesses--;
   document.getElementById("guess-counter").innerHTML = `Guesses: ${guesses}`;
   document.getElementById("search-results").innerHTML = ""
   const modal = document.querySelector("#results")
   modal.close()
-
+  //End of game, number of correct answers determines whether the player wins or loses. Regardless, they may click the try again button to load 6 new teams and restart.
   if(guesses == 0){
     const End_Screen = document.getElementById("End_Screen")
     if(correctAnswers==9){
-      const End_Screen = document.getElementById("End_Screen")
-      End_Screen.innerHTML = "You Win!"
+      document.getElementById("end_button").innerHTML = "You Win! <br> Try Again?"
     } else{
-      End_Screen.innerHTML = "You Lose:("
+      document.getElementById("end_button").innerHTML = "You Lose:( <br> Try Again?"
     }
     End_Screen.showModal()
   }
@@ -215,9 +235,13 @@ function selectRandomImage() {
   }
   return selectedTeams;
 }
-function createGameBoard(){
+function createGameBoard(){ 
   let selectedTeams = selectRandomImage();
   let team_ids = [];
+  guesses = 9;
+  document.getElementById("guess-counter").innerHTML = `Guesses: ${guesses}`;
+  correctAnswers = 0;
+  
   // Collects the team_ids of the selected teams and stores them into a list to be used later
   for(let i=0; i< selectedTeams.length;i++){
     for(let j = 0; j < prem_teams.length; j++){
