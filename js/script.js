@@ -123,7 +123,6 @@ let current_clicked_id = -1;
 var playerData = {};
 let guesses = 9;
 let correctAnswers = 0;
-let reset = false;
 
 /**
  * 
