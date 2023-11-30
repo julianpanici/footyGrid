@@ -125,31 +125,51 @@ let guesses = 9;
 let correctAnswers = 0;
 let reset = false;
 
-
+/**
+ * 
+ * @param {*} clicked_id 
+ */
 function openGuessTab(clicked_id) {
   current_clicked_id = parseInt(clicked_id.charAt(clicked_id.length-1));
-  console.log(current_clicked_id);
   const modal = document.querySelector("#modal")
   modal.showModal()
 }
 
-async function searchPlayer() {
+/**
+ * 
+ * @param {*} search 
+ * @returns 
+ */
+function checkSpecialChars(search){
   let specialChars = `!@#$%^&*()_\+=\[\]{};:"\\|,.<>\/?~`;
-  let specialCharFound = false
-  const search = document.getElementById("guess").value
-  // Checks submitted string to see if any special characters were entered
   for( let i = 0; i < specialChars.length; i++){
     if (search.indexOf(specialChars.charAt(i)) >=0){
-      specialCharFound = true
+      return true;
     }
   }
+  return false;
+}
+/**
+ * 
+ */
+async function searchPlayer() {
+  const search = document.getElementById("guess").value
+
+  // Checks submitted string to see if any special characters were entered
+  let specialCharFound = checkSpecialChars(search)
+
   //Catches special character error and allows user to keep submitting new guesses until error is fixed
   if (specialCharFound){
     document.getElementById("error_catcher").showModal();
     document.getElementById("error_catcher_button").innerHTML = "Error: Search contains special character";
   } else{
+
+  //Takes the user's input and uses it to query the player database from sports-reference and get a list of results
   const response = await fetch(`https://api.sports-reference.com/v1/fb/players?search=${search}`)
+
+  //Converts the response data to a json object in order to read and use the data inside.
   playerData = await response.json()
+
   //Catches 0 search results error and allows user to keep submitting new guesses until error is fixed
   if (typeof playerData.players === undefined || playerData.players == null){
     document.getElementById("error_catcher").showModal();
@@ -166,14 +186,20 @@ async function searchPlayer() {
   }
   }
 }
-
+/**
+ * 
+ * @param {*} player 
+ */
 function addOption(player) {
   var search_results = document.getElementById("search-results")
   var option = document.createElement("option")
   option.text = player.name
   search_results.add(option)
 }
-
+/**
+ * 
+ * @returns 
+ */
 function submitGuess() {
   let found_First_Team = false;
   let found_Second_Team = false;
@@ -217,9 +243,13 @@ function submitGuess() {
     }
     End_Screen.showModal()
   }
-
+  return found_First_Team && found_Second_Team;
 }
 
+/**
+ * 
+ * @returns selectedTeams, a list which contains the 6 random teams selected in the function
+ */
 function selectRandomImage() {
   let teamNames = ["arsenal.png", "astonVilla.png", "bournemouth.png", "brentford.png", "brighton.png", "burnley.png", "chelsea.png", "crystalPalace.png", "everton.png", "fulham.png", "liverpool.png", "lutonTown.png", "manCity.png", "manU.png", "newcastle.png", "nottinghamForest.png", "sheffieldUnited.png", "tottenham.png", "westHam.png", "wolves.png"]
   let selectedTeams = [];
@@ -235,6 +265,10 @@ function selectRandomImage() {
   }
   return selectedTeams;
 }
+
+/**
+ * 
+ */
 function createGameBoard(){ 
   let selectedTeams = selectRandomImage();
   let team_ids = [];
