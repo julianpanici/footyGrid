@@ -1,3 +1,6 @@
+/**
+ * JSON object which holds each team's id and the name of their image in the images file
+ */
 const prem_teams = [
   {
     "id": "153995",
@@ -80,6 +83,11 @@ const prem_teams = [
     "image": "wolves.png"
   }
 ]
+
+/**
+ * JSON object which holds the id of each button on the game board and a list containing the team id combination of each square
+ * on the game board.
+ */
 let game_board = [
   {
     "button_id": "board_button0",
@@ -119,26 +127,31 @@ let game_board = [
   }
 ]
 
+/**
+ * current_clicked_id: holds the button id of the most recent game board button clicked by the user.
+ * playerData: JSON object holding the playerData of all search results from querying the Sports-Reference API
+ * guesses: holds the number of guesses remaining for the user
+ * correctAnswers: holds the number of correct guesses the user has submitted
+ */
 let current_clicked_id = -1;
 var playerData = {};
 let guesses = 9;
 let correctAnswers = 0;
-let reset = false;
 
 /**
- * 
- * @param {*} clicked_id 
+ * Stores the id of the board button clicked by the user into current_clicked_id and opens the search window for the user
+ * @param {*} clicked_id: the id of the game button clicked by the user
  */
-function openGuessTab(clicked_id) {
+function openSearchTab(clicked_id) {
   current_clicked_id = parseInt(clicked_id.charAt(clicked_id.length-1));
   const modal = document.querySelector("#modal")
   modal.showModal()
 }
 
 /**
- * 
- * @param {*} search 
- * @returns 
+ * Helper function which checks the user's submitted search string for invalid special characters
+ * @param {*} search: the string submitted by the user
+ * @returns true if invalid special characters are found, false otherwise
  */
 function checkSpecialChars(search){
   let specialChars = `!@#$%^&*()_\+=\[\]{};:"\\|,.<>\/?~`;
@@ -149,8 +162,9 @@ function checkSpecialChars(search){
   }
   return false;
 }
+
 /**
- * 
+ * Uses the string submitted by the user to query the Sports-Reference API and displays the results back to the user 
  */
 async function searchPlayer() {
   const search = document.getElementById("guess").value
@@ -175,20 +189,24 @@ async function searchPlayer() {
     document.getElementById("error_catcher").showModal();
     document.getElementById("error_catcher_button").innerHTML = "Error: Search returned 0 results";
   }else{
+  
+  //Adds all search options to the scrollable list to be displayed back to the user in the resultModal
   const modal = document.querySelector("#modal")
   document.getElementById("guess").value = ""
   modal.close()
   for (i = 0; i < playerData.players.length; i++) {
     addOption(playerData.players[i])
   }
+  //Displays resultModal to user
   const resultModal = document.querySelector("#results")
   resultModal.showModal()
   }
   }
 }
+
 /**
- * 
- * @param {*} player 
+ * Adds the name of a player to the search_results scrollable list
+ * @param {*} player: holds the JSON object containing all of a player's information 
  */
 function addOption(player) {
   var search_results = document.getElementById("search-results")
@@ -196,9 +214,12 @@ function addOption(player) {
   option.text = player.name
   search_results.add(option)
 }
+
 /**
- * 
- * @returns 
+ * Cross-references the chosen player's team ids with the team id combination of the selected board button.
+ * If correct, updates number of correct guesses and displays the player's image
+ * Decrements number of guesses by 1 after checking to see if correct
+ * Once number of guesses reaches 0, displays appropriate end screen window.
  */
 function submitGuess() {
   let found_First_Team = false;
@@ -233,7 +254,8 @@ function submitGuess() {
   document.getElementById("search-results").innerHTML = ""
   const modal = document.querySelector("#results")
   modal.close()
-  //End of game, number of correct answers determines whether the player wins or loses. Regardless, they may click the try again button to load 6 new teams and restart.
+  //End of game, number of correct answers determines whether the player wins or loses. 
+  //Regardless, they may click the try again button to load 6 new teams and restart.
   if(guesses == 0){
     const End_Screen = document.getElementById("End_Screen")
     if(correctAnswers==9){
@@ -243,11 +265,10 @@ function submitGuess() {
     }
     End_Screen.showModal()
   }
-  return found_First_Team && found_Second_Team;
 }
 
 /**
- * 
+ * Selects 6 random team images who will represent the 6 teams on the game board
  * @returns selectedTeams, a list which contains the 6 random teams selected in the function
  */
 function selectRandomImage() {
@@ -267,7 +288,8 @@ function selectRandomImage() {
 }
 
 /**
- * 
+ * Initializes game, including setting number of guesses remaining, number of correct guesses, running selectRandomImage() to choose 6 teams,
+ * and setting the team id combination for each board button
  */
 function createGameBoard(){ 
   let selectedTeams = selectRandomImage();
@@ -283,6 +305,11 @@ function createGameBoard(){
         team_ids[i] = prem_teams[j].id;
       }
     }
+  }
+  // Ensures all board buttons begin with a no image and a clickable button
+  for(i = 0; i < 9; i++){
+   document.getElementById(`button_image${i}`).src = '';
+   document.getElementById(`board_button${i}`).disabled = false
   }
   // Initializes a list containing the id combo of each square of the game board
   for(i = 0; i < 3; i++){
